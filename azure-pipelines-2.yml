@@ -1,0 +1,17 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - script: |
+      go version
+      go mod tidy
+      go build -v ./...
+    displayName: 'Build Go App'
+
+  - script: |
+      echo "Running tests (if any)"
+      # go test ./...  <-- Uncomment this when you have tests
+    displayName: 'Run Tests'
