@@ -1,0 +1,22 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UseGoVersion@0
+    inputs:
+      version: '1.21'
+    displayName: 'Set Go Version'
+
+  - script: |
+      go version
+      go mod tidy
+      go build -v ./...
+    displayName: 'Build Go App'
+
+  - script: |
+      echo "Tests can go here"
+      # go test ./...  (Uncomment when tests are added)
+    displayName: 'Run Tests (placeholder)'
