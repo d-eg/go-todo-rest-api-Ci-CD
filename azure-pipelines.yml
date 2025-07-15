@@ -5,10 +5,18 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  - task: UseGoVersion@0
+    inputs:
+      version: '1.21'
+    displayName: 'Set Go Version'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - script: |
+      go version
+      go mod tidy
+      go build -v ./...
+    displayName: 'Build Go App'
+
+      - script: |
+      echo "Tests can go here"
+      # go test ./...  (Uncomment when tests are added)
+    displayName: 'Run Tests (placeholder)'
